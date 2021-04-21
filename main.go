@@ -6,6 +6,7 @@ import (
 	_ "github.com/heroku/x/hmetrics/onload"
 	"log"
 	"net/http"
+	"os"
 )
 
 
@@ -59,8 +60,9 @@ func NewRouter() *mux.Router {
 //	//handleRequests()
 //}
 func main() {
+	port := os.Getenv("PORT")
 	router := NewRouter()
-	if err := http.ListenAndServe(":8080", router); err != nil {
+	if err := http.ListenAndServe(":" + port, router); err != nil {
 		log.Fatal("ListenAndServe Error: ", err)
 	}
 }
